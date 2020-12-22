@@ -1,5 +1,17 @@
 import React, {useState, useEffect, useContext, createContext} from 'react'
 import firebase from './firebase'
+import {createUser} from './database'
+
+const formatUser = async (user: firebase.User) => {
+    return {
+        uid: user?.uid,
+        email: user?.email,
+        name: user?.displayName,
+        token: user.refreshToken,
+        provider: user.providerData[0].providerId,
+        photoUrl: user.photoURL,
+    }
+}
 
 const authContext = createContext({
     user: null,
@@ -18,13 +30,31 @@ export const useAuth = () => {
 
 function useProvideAuth() {
     const [user, setUser] = useState(null)
+    const [loading, setLoading] = useState(false)
+
+    const handleUser = async (rawUser: firebase.User) => {
+        if (rawUser) {
+            const user = await formatUser(rawUser);
+            const {token, ...userWithoutToken} = user;
+
+            await createUser(user.uid, userWithoutToken);
+            setUser(user);
+
+            setLoading(false);
+            return user;
+        } else {
+            setUser(false);
+            setLoading(false);
+            return false;
+        }
+    }
 
     const signInWithGithub = () => {
         return firebase
             .auth()
             .signInWithPopup(new firebase.auth.GithubAuthProvider())
-            .then((response) => {
-                setUser(response.user)
+            .then(async (response) => {
+                await handleUser(response.user);
                 return response.user
             })
     }
@@ -33,8 +63,8 @@ function useProvideAuth() {
         return firebase
             .auth()
             .signOut()
-            .then(() => {
-                setUser(false)
+            .then(async () => {
+                await handleUser(null)
             })
     }
 
