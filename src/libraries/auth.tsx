@@ -1,6 +1,6 @@
 import React, {useState, useEffect, useContext, createContext} from 'react'
-import firebase from './firebase'
-import {createUser} from './database'
+import firebase from '@/libraries/firebase'
+import {createUser} from '@/libraries/database'
 
 const formatUser = async (user: firebase.User) => {
     return {
