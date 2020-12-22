@@ -1,6 +1,6 @@
 import {CSSReset, ThemeProvider} from '@chakra-ui/react'
-import {ProvideAuth} from '@/libraries/auth'
-import theme from "@/styles/theme";
+import {ProvideAuth} from '../libraries/auth'
+import theme from "../styles/theme";
 
 function MyApp({Component, pageProps}) {
     return (

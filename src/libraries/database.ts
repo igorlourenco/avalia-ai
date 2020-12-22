@@ -1,6 +1,6 @@
 import firebase from 'firebase/app'
 import 'firebase/firestore'
-import User from '@/interfaces/User'
+import User from '../interfaces/User'
 
 const firestore = firebase.firestore()
 
