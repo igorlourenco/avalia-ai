@@ -1,5 +1,4 @@
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+import {Button, Code, Flex, Heading} from '@chakra-ui/react'
 import {useAuth} from '../libraries/auth'
 
 export default function Home() {
@@ -7,31 +6,26 @@ export default function Home() {
     const auth = useAuth()
 
     return (
-        <div className={styles.container}>
-            <Head>
-                <title>Create Next App</title>
-                <link rel="icon" href="/favicon.ico"/>
-            </Head>
-
-            <main className={styles.main}>
-                <h1 className={styles.title}>
+        <div>
+            <Flex direction={`column`} alignItems={`center`} justifyContent={`center`} height={`100vh`}>
+                <Heading size={`xl`}>
                     Avalia aí!
-                </h1>
+                </Heading>
 
                 {
                     !auth.user &&
-                    <button onClick={(e) => auth.signInWithGithub()}>entrar com github</button>
+                    <Button onClick={(e) => auth.signInWithGithub()}>entrar com github</Button>
                 }
 
                 {
                     auth.user &&
                     <div>
-                        <h6>{auth.user.email}</h6>
+                        <Heading size={`md`}>Usuário: <Code>{auth.user.email}</Code></Heading>
 
-                        <button onClick={(e) => auth.signOut()}>SAIR</button>
+                        <Button onClick={(e) => auth.signOut()}>SAIR</Button>
                     </div>
                 }
-            </main>
+            </Flex>
         </div>
     )
 }
