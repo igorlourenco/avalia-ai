@@ -25,5 +25,11 @@
   ],
   "exclude": [
     "node_modules"
-  ]
+  ],
+  "baseUrl": "./",
+  "paths": {
+    "@/interfaces/*": ["./src/interfaces/*"],
+    "@/libraries/*": ["./src/libraries/*"],
+    "@/styles/*": ["./src/styles/*"]
+  }
 }
