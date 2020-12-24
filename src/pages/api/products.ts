@@ -5,9 +5,11 @@ export default async (request: NextApiRequest, response: NextApiResponse) => {
     const snapshot = await database.collection('products').get();
     const products = [];
 
+    console.log(snapshot)
+
     snapshot.forEach((doc) => {
         products.push({ id: doc.id, ...doc.data() });
     });
 
-    response.status(200).json({ products });
+    return response.status(200).json({ products });
 }
