@@ -11,9 +11,9 @@ import {
     Heading,
 } from '@chakra-ui/react'
 import {useAuth} from "../libraries/auth";
+import AddProductModal from "./AddProductModal";
 
-const DashboardShell = ({children}) => {
-
+const DashboardShell = ({children, isEmptyState}) => {
     const auth = useAuth()
 
     return (
@@ -31,7 +31,7 @@ const DashboardShell = ({children}) => {
                 </Stack>
                 <Flex alignItems="center" justifyContent="center">
                     <Link mr={4}>Sua conta</Link>
-                    <Avatar size="sm" src={auth.user.photoURL}/>
+                    <Avatar size="sm" src={auth.user?.photoURL}/>
                 </Flex>
             </Flex>
             <Flex
@@ -48,9 +48,14 @@ const DashboardShell = ({children}) => {
                         <BreadcrumbItem marginY={2}>
                             <BreadcrumbLink fontSize={`sm`}>Produtos</BreadcrumbLink>
                         </BreadcrumbItem>
-                        <Heading marginBottom={12}>
-                            Seus produtos
-                        </Heading>
+                        <Flex justifyContent={`space-between`}>
+                            <Heading marginBottom={12}>
+                                Seus produtos
+                            </Heading>
+                            {
+                                isEmptyState ? ' ' : <AddProductModal isFirstProduct={false}/>
+                            }
+                        </Flex>
                         {children}
                     </Breadcrumb>
                 </Flex>

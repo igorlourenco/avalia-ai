@@ -1,15 +1,21 @@
 import EmptyState from "../components/EmptyState";
 import {useAuth} from "../libraries/auth";
-import {Text} from '@chakra-ui/react'
+import useSWR from 'swr'
+import fetcher from "../utilitaries/fetcher";
+import ProductTableSkeleton from "../components/ProductTableSkeleton";
+import ProductTable from "../components/ProductTable";
 
 const Dashboard = () => {
-    const auth = useAuth()
+    const {user} = useAuth()
+    const {data} = useSWR('/api/products', fetcher)
 
-    if (!auth.user) {
-        return <Text>Carregando...</Text>
+    console.log(data)
+
+    if (!data) {
+        return <ProductTableSkeleton/>
     }
 
-    return <EmptyState/>
+    return data.products ? <ProductTable products={data.products}/> : <EmptyState/>
 }
 
 export default Dashboard

@@ -9,7 +9,7 @@ import DashboardShell from "./DashboardShell";
 
 const FreePlanEmptyState = () => {
     return (
-        <DashboardShell>
+        <DashboardShell isEmptyState={false}>
             <Box
                 backgroundColor="white"
                 display="flex"

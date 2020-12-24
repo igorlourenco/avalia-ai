@@ -2,12 +2,12 @@ import React, {useState, useEffect, useContext, createContext} from 'react'
 import firebase from './firebase'
 import {createUser} from './database'
 
-const formatUser = async (user: firebase.User) => {
+const formatUser = async (user: any) => {
     return {
         uid: user?.uid,
         email: user?.email,
         name: user?.displayName,
-        token: user.refreshToken,
+        token: user.h,
         provider: user.providerData[0].providerId,
         photoUrl: user.photoURL,
     }

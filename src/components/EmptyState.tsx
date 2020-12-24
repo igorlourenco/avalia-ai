@@ -10,7 +10,7 @@ import AddProductModal from "./AddProductModal";
 
 const EmptyState = () => {
     return (
-        <DashboardShell>
+        <DashboardShell isEmptyState={true}>
             <Box
                 backgroundColor={`white`}
                 display={`flex`}
@@ -28,7 +28,7 @@ const EmptyState = () => {
                 <Text marginTop={4} marginBottom={5} fontSize={`md`}>
                     Bem-vindo(a) 👋🏾 Vamos começar!
                 </Text>
-                <AddProductModal/>
+                <AddProductModal isFirstProduct={true}/>
             </Box>
         </DashboardShell>
     )

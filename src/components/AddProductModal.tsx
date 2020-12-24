@@ -5,28 +5,58 @@ import {
     ModalHeader,
     ModalFooter,
     ModalBody,
-    ModalCloseButton, useDisclosure, FormControl, FormLabel, Input, Button, Textarea, Select
+    ModalCloseButton, useDisclosure, FormControl, FormLabel, Input, Button, Textarea, Select, useToast
 } from "@chakra-ui/react"
 import {useRef} from "react";
 import {useForm} from 'react-hook-form'
 import Product from "../interfaces/Product";
 import {createProduct} from "../libraries/database";
 import {useAuth} from "../libraries/auth";
+import useSWR, {mutate} from 'swr'
+import fetcher from "../utilitaries/fetcher";
 
-const AddProductModal = () => {
+const AddProductModal = ({isFirstProduct}) => {
     const auth = useAuth()
     const {isOpen, onOpen, onClose} = useDisclosure()
+    const toast = useToast()
     const initialRef = useRef()
-    const { register, handleSubmit } = useForm();
+    const {register, handleSubmit} = useForm();
+    const {data} = useSWR('/api/products', fetcher)
+
     const addProduct = async (product: Product) => {
-        await createProduct({owner: auth.user.uid, ...product})
+        const newProduct = {
+            owner: auth.user.uid,
+            createdAt: new Date().toISOString(),
+            ...product
+        }
+
+        await createProduct(newProduct)
+        onClose()
+
+        toast({
+            title: "Produto registrado!",
+            description: "Seu produto foi registrado e já pode receber feedbacks.",
+            status: "success",
+            duration: 7000,
+            isClosable: true,
+        })
+
+        mutate(
+            '/api/products',
+            async (data: any) => {
+                return {products: [...data.products, newProduct]}
+            },
+            false
+        )
     }
 
 
     return (
         <div>
             <Button variant={`solid`} size={`md`} onClick={onOpen} colorScheme={`teal`} fontWeight={`medium`}>
-                Adicione seu primeiro produto
+                {
+                    isFirstProduct ? 'Adicione seu primeiro produto' : '+ Adicionar Produto'
+                }
             </Button>
             <Modal
                 initialFocusRef={initialRef}
@@ -40,12 +70,14 @@ const AddProductModal = () => {
                     <ModalBody paddingBottom={6}>
                         <FormControl>
                             <FormLabel>Nome do produto</FormLabel>
-                            <Input name={`name`} ref={register({required: 'Required'})} placeholder="Qual é o nome do seu produto?"/>
+                            <Input name={`name`} ref={register({required: 'Required'})}
+                                   placeholder="Qual é o nome do seu produto?"/>
                         </FormControl>
 
                         <FormControl marginTop={4}>
                             <FormLabel>Descrição</FormLabel>
-                            <Textarea name={`description`} ref={register({required: 'Required'})} placeholder="Descreva brevemente seu produto..."/>
+                            <Textarea name={`description`} ref={register({required: 'Required'})}
+                                      placeholder="Descreva brevemente seu produto..."/>
                         </FormControl>
 
                         <FormControl marginTop={4}>
