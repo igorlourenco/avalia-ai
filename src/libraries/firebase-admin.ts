@@ -14,4 +14,6 @@ if (!admin.apps.length) {
 const database = admin.firestore();
 const auth = admin.auth();
 
+console.log('conectado')
+
 export { database, auth };
