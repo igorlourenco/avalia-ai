@@ -1,31 +1,33 @@
-import {Button, Code, Flex, Heading} from '@chakra-ui/react'
+import {Button, Flex, Heading, Image, Link} from '@chakra-ui/react'
 import {useAuth} from '../libraries/auth'
 
-export default function Home() {
+const Home = () => {
 
     const auth = useAuth()
 
     return (
         <div>
             <Flex direction={`column`} alignItems={`center`} justifyContent={`center`} height={`100vh`}>
-                <Heading size={`xl`}>
+                <Image src={`logo.svg`} width={`40`} height={`40`}/>
+                <Heading size={`xl`} marginBottom={5}>
                     Avalia aí!
                 </Heading>
-
                 {
                     !auth.user &&
-                    <Button onClick={(e) => auth.signInWithGithub()}>entrar com github</Button>
+                    <Button variant={`ghost`} size={`md`} onClick={(e) => auth.signInWithGithub()} margin={3}>Entrar com Github</Button>
                 }
 
                 {
                     auth.user &&
-                    <div>
-                        <Heading size={`md`}>Usuário: <Code>{auth.user.email}</Code></Heading>
+                    <Flex direction={`column`}>
+                        <Link href={`/dashboard`} margin={2}>Ir para Quadro de Gerenciamento</Link>
 
-                        <Button onClick={(e) => auth.signOut()}>SAIR</Button>
-                    </div>
+                        <Button width={`auto`} variant={`ghost`} size={`sm`} onClick={(e) => auth.signOut()} margin={2}>SAIR</Button>
+                    </Flex>
                 }
             </Flex>
         </div>
     )
 }
+
+export default Home

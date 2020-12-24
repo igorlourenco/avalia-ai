@@ -11,7 +11,6 @@ class MyDocument extends Document {
         return (
             <Html>
                 <Head>
-                    <title>Avalia aí!</title>
                     <link rel="icon" href="/favicon.ico"/>
                     <link rel="preconnect" href="https://fonts.gstatic.com"/>
                     <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap"
