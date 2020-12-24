@@ -1,7 +1,7 @@
-import {NextApiRequest, NextApiResponse} from "next";
+import {NowRequest, NowResponse} from '@vercel/node'
 import {database} from "../../libraries/firebase-admin";
 
-export default async (request: NextApiRequest, response: NextApiResponse) => {
+export default async (request: NowRequest, response: NowResponse) => {
     const snapshot = await database.collection('products').get();
     const products = [];
 
