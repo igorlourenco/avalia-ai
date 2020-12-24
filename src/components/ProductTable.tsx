@@ -18,8 +18,8 @@ const ProductTable = ({products}) => {
                 </Tr>
                 </thead>
                 <tbody>
-                {products.map((product) => (
-                    <Box as="tr" key={product.id}>
+                {products.map((product, index) => (
+                    <Box as="tr" key={index}>
                         <Td fontWeight="medium">{product.name}</Td>
                         <Td>{product.description}</Td>
                         <Td>
