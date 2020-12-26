@@ -2,6 +2,7 @@ import firebase from 'firebase/app'
 import 'firebase/firestore'
 import User from '../interfaces/User'
 import Product from "../interfaces/Product";
+import Feedback from "../interfaces/Feedback";
 
 const firestore = firebase.firestore()
 
@@ -16,4 +17,10 @@ export async function createProduct(product: Product) {
     return await firestore
         .collection('products')
         .add(product)
+}
+
+export async function createFeedback(feedback: Feedback) {
+    return await firestore
+        .collection('feedback')
+        .add(feedback)
 }

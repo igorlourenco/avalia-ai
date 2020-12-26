@@ -1,15 +1,12 @@
-import {NowRequest, NowResponse} from '@vercel/node'
-import {database} from "../../libraries/firebase-admin";
+import {NextApiRequest, NextApiResponse} from "next";
+import {getAllProducts} from "../../libraries/database-admin";
 
-export default async (request: NowRequest, response: NowResponse) => {
-    const snapshot = await database.collection('products').get();
-    const products = [];
+export default async (request: NextApiRequest, response: NextApiResponse) => {
+    const { products, error } = await getAllProducts()
 
-    console.log(snapshot)
-
-    snapshot.forEach((doc) => {
-        products.push({ id: doc.id, ...doc.data() });
-    });
+    if (error) {
+        return response.status(500).json({ error });
+    }
 
     return response.status(200).json({ products });
 }

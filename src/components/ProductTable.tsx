@@ -23,7 +23,7 @@ const ProductTable = ({products}) => {
                         <Td fontWeight="medium">{product.name}</Td>
                         <Td>{product.description}</Td>
                         <Td>
-                            <Link>Ver Feedbacks</Link>
+                            <Link isExternal href={`/avaliacoes/${product.id}`}>Ver Feedbacks</Link>
                         </Td>
                         <Td>{format(parseISO(product.createdAt), 'PPpp')}</Td>
                     </Box>
