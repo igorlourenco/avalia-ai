@@ -62,7 +62,7 @@ const ProductFeedback = ({initialFeedback}) => {
 
 export const getStaticProps: GetStaticProps = async (context) => {
     const {productId} = context.params
-    const feedback = await getAllFeedback(productId.toString())
+    const {feedback} = await getAllFeedback(productId.toString())
 
     return {
         props: {
@@ -73,7 +73,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-    const products = await getAllProducts()
+    const {products} = await getAllProducts()
     const paths = products.map(product => ({
         params: {productId: product.id}
     }))
