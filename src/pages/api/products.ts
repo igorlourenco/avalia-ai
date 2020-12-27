@@ -1,12 +1,20 @@
 import {NextApiRequest, NextApiResponse} from "next";
-import {getAllProducts} from "../../libraries/database-admin";
+import {getUserProducts} from "../../libraries/database-admin";
+import {auth} from "../../libraries/firebase-admin";
 
 export default async (request: NextApiRequest, response: NextApiResponse) => {
-    const { products, error } = await getAllProducts()
+    try {
+        const {token} = request.headers
+        const {uid} = await auth.verifyIdToken(token.toString())
 
-    if (error) {
-        return response.status(500).json({ error });
+        const {products, error} = await getUserProducts(uid)
+
+        if (error) {
+            return response.status(500).json({error});
+        }
+
+        return response.status(200).json({products});
+    } catch (error) {
+        return response.status(500).json({error});
     }
-
-    return response.status(200).json({ products });
 }

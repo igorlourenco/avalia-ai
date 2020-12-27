@@ -7,7 +7,7 @@ import ProductTable from "../components/ProductTable";
 
 const Dashboard = () => {
     const {user} = useAuth()
-    const {data} = useSWR('/api/products', fetcher)
+    const {data} = useSWR(user ? ['/api/products', user.token] : null, fetcher)
 
     console.log(data)
 

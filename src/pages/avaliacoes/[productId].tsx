@@ -22,7 +22,7 @@ const ProductFeedback = ({initialFeedback}) => {
             authorId: auth.user.uid,
             provider: auth.user.providerData[0].providerId,
             productId,
-            rating: 'temp',
+            rating: 5,
             ...feedback,
             createdAt: new Date().toISOString(),
             status: 'pending'

@@ -42,7 +42,7 @@ const AddProductModal = ({isFirstProduct}) => {
         })
 
         mutate(
-            '/api/products',
+            auth.user ? ['/api/products', auth.user.token] : null,
             async (data: any) => {
                 return {products: [...data.products, newProduct]}
             },

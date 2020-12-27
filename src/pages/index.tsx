@@ -1,5 +1,6 @@
 import {Button, Flex, Heading, Image, Link} from '@chakra-ui/react'
 import {useAuth} from '../libraries/auth'
+import Head from "next/head";
 
 const Home = () => {
 

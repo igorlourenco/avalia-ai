@@ -1,9 +1,9 @@
-import {database} from './firebase-admin'
+import {firestore} from './firebase-admin'
 import {compareDesc, parseISO} from "date-fns";
 
 export async function getAllFeedback(productId: string) {
     try {
-        const snapshot = await database.collection('feedback')
+        const snapshot = await firestore.collection('feedback')
             .where('productId', '==', productId)
             .get()
 
@@ -23,9 +23,28 @@ export async function getAllFeedback(productId: string) {
     }
 }
 
+
+export async function getUserProducts(uid: string) {
+    try {
+        const snapshot = await firestore.collection('products')
+            .where('owner', '==', uid)
+            .get();
+
+        const products = [];
+
+        snapshot.forEach((doc) => {
+            products.push({id: doc.id, ...doc.data()});
+        });
+
+        return {products};
+    } catch (error) {
+        return {error}
+    }
+}
+
 export async function getAllProducts() {
     try {
-        const snapshot = await database.collection('products').get();
+        const snapshot = await firestore.collection('products').get();
 
         const products = [];
 
