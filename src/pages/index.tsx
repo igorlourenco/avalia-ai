@@ -7,7 +7,18 @@ const Home = () => {
     const auth = useAuth()
 
     return (
-        <div>
+        <>
+            <Head>
+                <script
+                    dangerouslySetInnerHTML={{
+                        __html: `
+                        if(document.cookie  && document.cookie.includes('avalia-ai-auth')){
+                            window.location.href = "/dashboard"
+                        }
+                    `
+                    }}
+                />
+            </Head>
             <Flex direction={`column`} alignItems={`center`} justifyContent={`center`} height={`100vh`}>
                 <Image src={`logo.svg`} width={`40`} height={`40`}/>
                 <Heading size={`xl`} marginBottom={5}>
@@ -27,7 +38,7 @@ const Home = () => {
                     </Flex>
                 }
             </Flex>
-        </div>
+        </>
     )
 }
 

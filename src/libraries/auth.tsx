@@ -1,6 +1,7 @@
 import React, {useState, useEffect, useContext, createContext} from 'react'
 import firebase from './firebase'
 import {createUser} from './database'
+import cookie from 'js-cookie'
 
 const formatUser = async (user: any) => {
     return {
@@ -41,10 +42,13 @@ function useProvideAuth() {
             setUser(user);
 
             setLoading(false);
+
+            cookie.set('avalia-ai-auth', true, {expires: 7})
             return user;
         } else {
             setUser(false);
             setLoading(false);
+            cookie.remove('avalia-ai-auth')
             return false;
         }
     }
