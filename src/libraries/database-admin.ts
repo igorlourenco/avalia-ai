@@ -1,6 +1,5 @@
 import {database} from './firebase-admin'
 import {compareDesc, parseISO} from "date-fns";
-import Feedback from "../interfaces/Feedback";
 
 export async function getAllFeedback(productId: string) {
     try {
@@ -14,12 +13,9 @@ export async function getAllFeedback(productId: string) {
             feedback.push({id: doc.id, ...doc.data()});
         });
 
-        feedback.sort((feedbackA: Feedback, feedbackB: Feedback) =>
-            compareDesc(
-                parseISO(feedbackA.createdAt.toISOString()),
-                parseISO(feedbackB.createdAt.toISOString())
-            )
-        )
+        feedback.sort((a, b) =>
+            compareDesc(parseISO(a.createdAt), parseISO(b.createdAt))
+        );
 
         return {feedback};
     } catch (error) {

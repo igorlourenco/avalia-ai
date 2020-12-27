@@ -53,7 +53,7 @@ const ProductFeedback = ({initialFeedback}) => {
 
             {
                 allFeedback.map((feedback, index) => (
-                    <Feedback key={index} author={feedback.author} text={feedback.text} createdAt={feedback.createdAt}/>
+                    <Feedback key={index} {...feedback}/>
                 ))
             }
         </Box>
