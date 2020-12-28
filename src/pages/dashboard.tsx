@@ -7,15 +7,19 @@ import ProductTable from "../components/ProductTable";
 
 const Dashboard = () => {
     const {user} = useAuth()
-    const {data} = useSWR(user ? ['/api/products', user.token] : null, fetcher)
 
-    console.log(data)
+    if(!user){
+        return <ProductTableSkeleton/>
+    }
+
+    const { data } = useSWR(user ? ['/api/products', user.ya] : null, fetcher);
 
     if (!data) {
         return <ProductTableSkeleton/>
     }
 
     return data.products ? <ProductTable products={data.products}/> : <EmptyState/>
+
 }
 
 export default Dashboard

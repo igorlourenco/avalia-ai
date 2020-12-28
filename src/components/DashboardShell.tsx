@@ -8,7 +8,7 @@ import {
     Breadcrumb,
     BreadcrumbItem,
     BreadcrumbLink,
-    Heading,
+    Heading, Button,
 } from '@chakra-ui/react'
 import {useAuth} from "../libraries/auth";
 import AddProductModal from "./AddProductModal";
@@ -30,7 +30,8 @@ const DashboardShell = ({children, isEmptyState}) => {
                     <Link>Feedbacks</Link>
                 </Stack>
                 <Flex alignItems="center" justifyContent="center">
-                    <Link mr={4}>Sua conta</Link>
+                    <Button width={`auto`} variant={`ghost`} size={`sm`} onClick={(e) => auth.signOut()} margin={2}>SAIR</Button>
+
                     <Avatar size="sm" src={auth.user?.photoURL}/>
                 </Flex>
             </Flex>

@@ -4,11 +4,13 @@ import {createUser} from './database'
 import cookie from 'js-cookie'
 
 const formatUser = async (user: any) => {
+    const token = await user.getIdToken()
+
     return {
         uid: user?.uid,
         email: user?.email,
         name: user?.displayName,
-        token: user.h,
+        token,
         provider: user.providerData[0].providerId,
         photoUrl: user.photoURL,
     }
@@ -37,9 +39,9 @@ function useProvideAuth() {
         if (rawUser) {
             const user = await formatUser(rawUser);
             const {token, ...userWithoutToken} = user;
-
+            console.log('auth', user.token)
+            setUser(user)
             await createUser(user.uid, userWithoutToken);
-            setUser(user);
 
             setLoading(false);
 

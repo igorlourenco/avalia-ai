@@ -33,7 +33,6 @@ const Home = () => {
                     auth.user &&
                     <Flex direction={`column`}>
                         <Link href={`/dashboard`} margin={2}>Ir para Quadro de Gerenciamento</Link>
-
                         <Button width={`auto`} variant={`ghost`} size={`sm`} onClick={(e) => auth.signOut()} margin={2}>SAIR</Button>
                     </Flex>
                 }
