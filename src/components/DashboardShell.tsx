@@ -53,9 +53,7 @@ const DashboardShell = ({children, isEmptyState}) => {
                             <Heading marginBottom={12}>
                                 Seus produtos
                             </Heading>
-                            {
-                                isEmptyState ? ' ' : <AddProductModal isFirstProduct={false}/>
-                            }
+                            <AddProductModal isFirstProduct={false}/>
                         </Flex>
                         {children}
                     </Breadcrumb>

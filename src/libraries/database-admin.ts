@@ -36,6 +36,10 @@ export async function getUserProducts(uid: string) {
             products.push({id: doc.id, ...doc.data()});
         });
 
+        products.sort((a, b) =>
+            compareDesc(parseISO(a.createdAt), parseISO(b.createdAt))
+        );
+
         return {products};
     } catch (error) {
         return {error}

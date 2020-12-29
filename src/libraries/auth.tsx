@@ -2,27 +2,15 @@ import React, {useState, useEffect, useContext, createContext} from 'react'
 import firebase from './firebase'
 import {createUser} from './database'
 import cookie from 'js-cookie'
-
-const formatUser = async (user: any) => {
-    const token = await user.getIdToken()
-
-    return {
-        uid: user?.uid,
-        email: user?.email,
-        name: user?.displayName,
-        token,
-        provider: user.providerData[0].providerId,
-        photoUrl: user.photoURL,
-    }
-}
+import Router from 'next/router';
 
 const authContext = createContext({
-    user: null,
-    signInWithGithub: null,
-    signOut: null
+    user: undefined,
+    signInWithGithub: undefined,
+    signOut: undefined
 })
 
-export function ProvideAuth({children}) {
+export function AuthProvider({children}) {
     const auth = useProvideAuth()
     return <authContext.Provider value={auth}>{children}</authContext.Provider>
 }
@@ -32,40 +20,46 @@ export const useAuth = () => {
 }
 
 function useProvideAuth() {
-    const [user, setUser] = useState(null)
-    const [loading, setLoading] = useState(false)
+    const [user, setUser] = useState({})
 
     const handleUser = async (rawUser: firebase.User) => {
         if (rawUser) {
-            const user = await formatUser(rawUser);
-            const {token, ...userWithoutToken} = user;
-            console.log('auth', user.token)
-            setUser(user)
-            await createUser(user.uid, userWithoutToken);
+            const tempUser = await formatUser(rawUser);
 
-            setLoading(false);
+            const { token, ...userWithoutToken } = tempUser;
 
-            cookie.set('avalia-ai-auth', true, {expires: 7})
-            return user;
+            setUser(tempUser);
+            await createUser(tempUser.uid, userWithoutToken);
+
+            cookie.set('avalia-ai-auth', true, {
+                expires: 1
+            });
+
+            return tempUser;
         } else {
             setUser(false);
-            setLoading(false);
-            cookie.remove('avalia-ai-auth')
+            cookie.remove('avalia-ai-auth');
+
             return false;
         }
     }
 
-    const signInWithGithub = () => {
+    const signInWithGithub = (redirect) => {
         return firebase
             .auth()
             .signInWithPopup(new firebase.auth.GithubAuthProvider())
             .then(async (response) => {
                 await handleUser(response.user);
-                return response.user
-            })
-    }
 
-    const signOut = () => {
+                if (redirect) {
+                    await Router.push(redirect);
+                }
+            });
+    };
+
+    const signOut = async () => {
+        cookie.remove('avalia-ai-auth');
+        await Router.push('/')
         return firebase
             .auth()
             .signOut()
@@ -90,5 +84,16 @@ function useProvideAuth() {
         user,
         signInWithGithub,
         signOut
+    }
+}
+
+const formatUser = async (user: any) => {
+    return {
+        uid: user?.uid,
+        email: user?.email,
+        name: user?.displayName,
+        token: user.ya,
+        provider: user.providerData[0].providerId,
+        photoUrl: user.photoURL,
     }
 }
