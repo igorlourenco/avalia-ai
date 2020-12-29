@@ -1,7 +1,5 @@
 import { Box, Skeleton } from '@chakra-ui/react';
 import { Table, Tr, Th, Td } from './Table';
-import DashboardShell from "./DashboardShell";
-import React from "react";
 
 const SkeletonRow = ({ width }) => (
     <Box as="tr">
@@ -22,7 +20,6 @@ const SkeletonRow = ({ width }) => (
 
 const ProductTableSkeleton = () => {
     return (
-        <DashboardShell isEmptyState={false}>
             <Table>
                 <thead>
                 <Tr>
@@ -41,7 +38,6 @@ const ProductTableSkeleton = () => {
                 <SkeletonRow width="75px" />
                 </tbody>
             </Table>
-        </DashboardShell>
     );
 };
 

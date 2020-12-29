@@ -25,12 +25,13 @@ const DashboardShell = ({children, isEmptyState}) => {
                 alignItems="center"
             >
                 <Stack spacing={4} isInline justifyContent="center" alignItems="center">
-                    <Icon name="eye"/>
+                    <Icon name={`plus`}/>
                     <Link>Seus produtos</Link>
                     <Link>Feedbacks</Link>
                 </Stack>
                 <Flex alignItems="center" justifyContent="center">
-                    <Button width={`auto`} variant={`ghost`} size={`sm`} onClick={(e) => auth.signOut()} margin={2}>SAIR</Button>
+                    <Button width={`auto`} variant={`ghost`} size={`sm`} onClick={(e) => auth.signOut()}
+                            margin={2}>SAIR</Button>
 
                     <Avatar size="sm" src={auth.user?.photoURL}/>
                 </Flex>
@@ -42,21 +43,20 @@ const DashboardShell = ({children, isEmptyState}) => {
             >
                 <Flex
                     flexDirection="column"
-                    alignItems="center"
                     justifyContent="flex-start"
                 >
                     <Breadcrumb p={4}>
                         <BreadcrumbItem marginY={2}>
                             <BreadcrumbLink fontSize={`sm`}>Produtos</BreadcrumbLink>
                         </BreadcrumbItem>
-                        <Flex justifyContent={`space-between`}>
-                            <Heading marginBottom={12}>
-                                Seus produtos
-                            </Heading>
-                            <AddProductModal isFirstProduct={false}/>
-                        </Flex>
-                        {children}
                     </Breadcrumb>
+                    <Flex justifyContent={`space-between`}>
+                        <Heading marginBottom={12}>
+                            Seus produtos
+                        </Heading>
+                        <AddProductModal isFirstProduct={false}/>
+                    </Flex>
+                    {children}
                 </Flex>
             </Flex>
         </Flex>

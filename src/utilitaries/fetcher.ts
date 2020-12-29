@@ -1,4 +1,4 @@
-export default async (url: string, token: string) => {
+export default async function fetcher (url: string, token: string){
     const response = await fetch(url, {
         method: 'GET',
         headers: new Headers({

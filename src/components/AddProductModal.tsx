@@ -52,7 +52,7 @@ const AddProductModal = ({isFirstProduct}) => {
 
 
     return (
-        <div>
+        <>
             <Button variant={`solid`} size={`md`} onClick={onOpen} colorScheme={`teal`} fontWeight={`medium`}>
                 {
                     isFirstProduct ? 'Adicione seu primeiro produto' : '+ Adicionar Produto'
@@ -101,7 +101,7 @@ const AddProductModal = ({isFirstProduct}) => {
                     </ModalFooter>
                 </ModalContent>
             </Modal>
-        </div>
+        </>
     )
 }
 
