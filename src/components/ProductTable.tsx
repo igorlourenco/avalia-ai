@@ -1,5 +1,5 @@
 import React from 'react';
-import {Box, Link} from '@chakra-ui/react';
+import {Box, Link, Text} from '@chakra-ui/react';
 import {Table, Tr, Th, Td} from './Table';
 import {parseISO, format} from 'date-fns';
 
@@ -21,9 +21,14 @@ const ProductTable = ({products}) => {
                     <Td fontWeight={`medium`}>{product.name}</Td>
                     <Td>{product.description}</Td>
                     <Td>
-                        <Link isExternal href={`/avaliacoes/${product.id}`} fontWeight={`medium`} color={`teal.600`}>
-                            Ver Feedbacks
-                        </Link>
+                        {
+                            product.id ? (
+                                <Link isExternal href={`/avaliacoes/${product.id}`} fontWeight={`medium`} color={`teal.600`}>
+                                    Ver Feedbacks
+                                </Link>
+                            ) :
+                                <Text color={`teal.500`}>Gerando link...</Text>
+                        }
                     </Td>
                     <Td>{format(parseISO(product.createdAt), 'PPpp')}</Td>
                 </Box>

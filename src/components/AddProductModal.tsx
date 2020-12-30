@@ -35,7 +35,7 @@ const AddProductModal = ({isFirstProduct}) => {
 
         toast({
             title: "Produto registrado!",
-            description: "Seu produto foi registrado e já pode receber feedbacks.",
+            description: "Seu produto foi registrado e poderá receber avaliações em instantes. Aguarde alguns segundos.",
             status: "success",
             duration: 7000,
             isClosable: true,
