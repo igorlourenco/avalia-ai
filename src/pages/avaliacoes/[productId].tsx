@@ -1,12 +1,12 @@
-import {GetStaticPaths, GetStaticProps} from "next";
 import {getAllFeedback, getAllProducts} from "../../libraries/database-admin";
 import Feedback from "../../components/Feedback"
 import {Box, Button, FormControl, FormLabel, Textarea} from "@chakra-ui/react"
 import {useForm} from "react-hook-form";
 import {useAuth} from "../../libraries/auth";
-import {useRouter} from "next/router";
 import {createFeedback} from "../../libraries/database";
 import {useState} from "react";
+import {useRouter} from "next/router";
+import {GetStaticPaths, GetStaticProps} from "next";
 
 const ProductFeedback = ({initialFeedback}) => {
     const auth = useAuth()

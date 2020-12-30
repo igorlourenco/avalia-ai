@@ -1,6 +1,23 @@
 import {firestore} from './firebase-admin'
 import {compareDesc, parseISO} from "date-fns";
 
+
+export async function getAllProducts() {
+    try {
+        const snapshot = await firestore.collection('products').get();
+
+        const products = [];
+
+        snapshot.forEach((doc) => {
+            products.push({id: doc.id, ...doc.data()});
+        });
+
+        return {products};
+    } catch (error) {
+        return {error}
+    }
+}
+
 export async function getAllFeedback(productId: string) {
     try {
         const snapshot = await firestore.collection('feedback')
@@ -22,7 +39,6 @@ export async function getAllFeedback(productId: string) {
         return {error}
     }
 }
-
 
 export async function getUserProducts(uid: string) {
     try {
@@ -46,17 +62,23 @@ export async function getUserProducts(uid: string) {
     }
 }
 
-export async function getAllProducts() {
+export async function getUserFeedback(authorId: string) {
     try {
-        const snapshot = await firestore.collection('products').get();
+        const snapshot = await firestore.collection('feedback')
+            .where('authorId', '==', authorId)
+            .get();
 
-        const products = [];
+        const feedback = [];
 
         snapshot.forEach((doc) => {
-            products.push({id: doc.id, ...doc.data()});
+            feedback.push({id: doc.id, ...doc.data()});
         });
 
-        return {products};
+        feedback.sort((a, b) =>
+            compareDesc(parseISO(a.createdAt), parseISO(b.createdAt))
+        );
+
+        return {feedback};
     } catch (error) {
         return {error}
     }

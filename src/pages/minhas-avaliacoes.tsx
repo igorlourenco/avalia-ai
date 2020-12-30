@@ -2,39 +2,40 @@ import EmptyState from "../components/EmptyState";
 import {useAuth} from "../libraries/auth";
 import useSWR from 'swr'
 import fetcher from "../utilitaries/fetcher";
-import ProductTableSkeleton from "../components/ProductTableSkeleton";
-import ProductTable from "../components/ProductTable";
 import DashboardShell from "../components/DashboardShell";
-import ProductTableHeader from "../components/ProductTableHeader";
+import FeedbackTableSkeleton from "../components/FeedbackTableSkeleton";
+import FeedbackTable from "../components/FeedbackTable";
+import FeedbackTableHeader from "../components/FeedbackTableHeader";
 
-const Dashboard = () => {
+const MyFeedback = () => {
     const {user} = useAuth()
 
-    const {data} = useSWR(user ? ['/api/products', user.ya] : null, fetcher);
+    const {data} = useSWR(user.ya ? ['/api/feedback', user.ya] : null, fetcher);
 
     if (!data) {
         return (
             <DashboardShell isEmptyState={false}>
-                <ProductTableHeader/>
-                <ProductTableSkeleton/>
+                <FeedbackTableHeader/>
+                <FeedbackTableSkeleton/>
             </DashboardShell>
         )
     }
 
-    return data.products?.length > 0 ?
+    return data.feedback?.length > 0 ?
         (
             <DashboardShell isEmptyState={false}>
-                <ProductTableHeader/>
-                <ProductTable products={data.products}/>
+                <FeedbackTableHeader/>
+                <FeedbackTable feedback={data.feedback}/>
             </DashboardShell>
         ) :
         (
             <DashboardShell isEmptyState={true}>
-                <ProductTableHeader/>
+                <FeedbackTableHeader/>
                 <EmptyState/>
             </DashboardShell>
         )
 
+
 }
 
-export default Dashboard
+export default MyFeedback

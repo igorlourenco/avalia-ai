@@ -5,15 +5,11 @@ import {
     Link,
     Icon,
     Avatar,
-    Breadcrumb,
-    BreadcrumbItem,
-    BreadcrumbLink,
-    Heading, Button,
+    Button,
 } from '@chakra-ui/react'
 import {useAuth} from "../libraries/auth";
-import AddProductModal from "./AddProductModal";
 
-const DashboardShell = ({children, isEmptyState}) => {
+const DashboardShell = ({children}) => {
     const auth = useAuth()
 
     return (
@@ -21,13 +17,14 @@ const DashboardShell = ({children, isEmptyState}) => {
             <Flex
                 backgroundColor="white"
                 justifyContent="space-between"
-                padding={4}
+                paddingY={3}
+                paddingX={4}
                 alignItems="center"
             >
                 <Stack spacing={4} isInline justifyContent="center" alignItems="center">
                     <Icon name={`plus`}/>
-                    <Link>Seus produtos</Link>
-                    <Link>Feedbacks</Link>
+                    <Link href={`/dashboard`}>Meus produtos</Link>
+                    <Link href={`/minhas-avaliacoes`}>Minhas avaliações</Link>
                 </Stack>
                 <Flex alignItems="center" justifyContent="center">
                     <Button width={`auto`} variant={`ghost`} size={`sm`} onClick={(e) => auth.signOut()}
@@ -42,20 +39,10 @@ const DashboardShell = ({children, isEmptyState}) => {
                 alignItems="center"
             >
                 <Flex
+                    margin={`0 auto`}
                     flexDirection="column"
                     justifyContent="flex-start"
                 >
-                    <Breadcrumb p={4}>
-                        <BreadcrumbItem marginY={2}>
-                            <BreadcrumbLink fontSize={`sm`}>Produtos</BreadcrumbLink>
-                        </BreadcrumbItem>
-                    </Breadcrumb>
-                    <Flex justifyContent={`space-between`}>
-                        <Heading marginBottom={12}>
-                            Seus produtos
-                        </Heading>
-                        <AddProductModal isFirstProduct={false}/>
-                    </Flex>
                     {children}
                 </Flex>
             </Flex>
