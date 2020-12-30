@@ -1,6 +1,7 @@
-import {Button, Flex, Heading, Image, Link} from '@chakra-ui/react'
+import {Box, Button, Flex, Heading, Image, Link} from '@chakra-ui/react'
 import {useAuth} from '../libraries/auth'
 import Head from "next/head";
+import {FcGoogle} from 'react-icons/fc'
 
 const Home = () => {
 
@@ -26,14 +27,23 @@ const Home = () => {
                 </Heading>
                 {
                     !auth.user &&
-                    <Button variant={`ghost`} size={`md`} onClick={(e) => auth.signInWithGithub()} margin={3}>Entrar com Github</Button>
+                        <Button variant="outline" size={`md`} fontWeight={`medium`}
+                                colorScheme={"#000"}
+                                onClick={auth.signInWithGoogle}
+                                margin={3}>
+                            <Box as={FcGoogle} size={24} marginRight={2}/>
+                            Entre com Google
+                        </Button>
+
+
                 }
 
                 {
                     auth.user &&
                     <Flex direction={`column`}>
                         <Link href={`/dashboard`} margin={2}>Ir para Quadro de Gerenciamento</Link>
-                        <Button width={`auto`} variant={`ghost`} size={`sm`} onClick={(e) => auth.signOut()} margin={2}>SAIR</Button>
+                        <Button width={`auto`} variant={`ghost`} size={`sm`} onClick={auth.signOut}
+                                margin={2}>SAIR</Button>
                     </Flex>
                 }
             </Flex>

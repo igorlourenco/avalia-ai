@@ -3,13 +3,13 @@ import {
     Flex,
     Stack,
     Link,
-    Icon,
+    Icon, Image,
     Avatar,
     Button,
 } from '@chakra-ui/react'
 import {useAuth} from "../libraries/auth";
 
-const DashboardShell = ({children}) => {
+const DashboardShell = ({children, isEmptyState}) => {
     const auth = useAuth()
 
     return (
@@ -22,7 +22,7 @@ const DashboardShell = ({children}) => {
                 alignItems="center"
             >
                 <Stack spacing={4} isInline justifyContent="center" alignItems="center">
-                    <Icon name={`plus`}/>
+                    <Image src={`logo.svg`} boxSize={`50px`}/>
                     <Link href={`/dashboard`}>Meus produtos</Link>
                     <Link href={`/minhas-avaliacoes`}>Minhas avaliações</Link>
                 </Stack>

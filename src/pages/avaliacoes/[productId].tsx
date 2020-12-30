@@ -7,6 +7,7 @@ import {createFeedback} from "../../libraries/database";
 import {useState} from "react";
 import {useRouter} from "next/router";
 import {GetStaticPaths, GetStaticProps} from "next";
+import {FcGoogle} from 'react-icons/fc'
 
 const ProductFeedback = ({initialFeedback}) => {
     const auth = useAuth()
@@ -48,7 +49,13 @@ const ProductFeedback = ({initialFeedback}) => {
 
             {
                 !auth.user &&
-                <Button variant={`ghost`} size={`md`} onClick={(e) => auth.signInWithGithub()} margin={3}>Entrar com Github</Button>
+                <Button variant="outline" size={`md`} fontWeight={`medium`}
+                        colorScheme={"#000"}
+                        onClick={auth.signInWithGoogle}
+                        margin={3}>
+                    <Box as={FcGoogle} size={24} marginRight={2}/>
+                    Entre com Google
+                </Button>
             }
 
             {

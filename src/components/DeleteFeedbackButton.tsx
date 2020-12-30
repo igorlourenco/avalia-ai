@@ -8,14 +8,13 @@ import {
     AlertDialogContent,
     AlertDialogOverlay,
     IconButton,
-    Button
+    Button, Box
 } from '@chakra-ui/react';
 
-import {DeleteIcon} from '@chakra-ui/icons'
 
 import { deleteFeedback } from '../libraries/database';
 import { useAuth } from '../libraries/auth';
-import fetcher from "../utilitaries/fetcher";
+import {AiFillDelete} from 'react-icons/ai'
 
 const DeleteFeedbackButton = ({ feedbackId }) => {
     const [isOpen, setIsOpen] = useState<boolean>();
@@ -41,7 +40,7 @@ const DeleteFeedbackButton = ({ feedbackId }) => {
 
     return (
         <>
-            <IconButton variant={`ghost`} aria-label="Search database" icon={<DeleteIcon color={`red.600`} w={4} h={4}/>} onClick={() => setIsOpen(true)}/>
+            <IconButton variant={`ghost`} aria-label="Search database" icon={<Box as={AiFillDelete} color={`red.600`} size={24}/>} onClick={() => setIsOpen(true)}/>
             <AlertDialog
                 isOpen={isOpen}
                 leastDestructiveRef={cancelRef}

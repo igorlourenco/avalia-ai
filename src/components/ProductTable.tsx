@@ -21,7 +21,7 @@ const ProductTable = ({products}) => {
                     <Td fontWeight={`medium`}>{product.name}</Td>
                     <Td>{product.description}</Td>
                     <Td>
-                        <Link isExternal href={`/avaliacoes/${product.id}`} fontWeight={`medium`} color={`teal.700`}>
+                        <Link isExternal href={`/avaliacoes/${product.id}`} fontWeight={`medium`} color={`teal.600`}>
                             Ver Feedbacks
                         </Link>
                     </Td>

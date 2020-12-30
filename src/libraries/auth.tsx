@@ -2,12 +2,12 @@ import React, {useState, useEffect, useContext, createContext} from 'react'
 import firebase from './firebase'
 import {createUser} from './database'
 import cookie from 'js-cookie'
-import Router from 'next/router';
+import {useRouter} from "next/router";
 
 const authContext = createContext({
-    user: undefined,
-    signInWithGithub: undefined,
-    signOut: undefined
+    user: null,
+    signInWithGoogle: null,
+    signOut: null
 })
 
 export function AuthProvider({children}) {
@@ -20,6 +20,7 @@ export const useAuth = () => {
 }
 
 function useProvideAuth() {
+    const router = useRouter()
     const [user, setUser] = useState({})
 
     const handleUser = async (rawUser: firebase.User) => {
@@ -44,22 +45,22 @@ function useProvideAuth() {
         }
     }
 
-    const signInWithGithub = (redirect) => {
+    const signInWithGoogle = (redirect) => {
         return firebase
             .auth()
-            .signInWithPopup(new firebase.auth.GithubAuthProvider())
+            .signInWithPopup(new firebase.auth.GoogleAuthProvider())
             .then(async (response) => {
                 await handleUser(response.user);
 
                 if (redirect) {
-                    await Router.push(redirect);
+                    await router.push(redirect);
                 }
             });
     };
 
-    const signOut = async () => {
+    const signOut = () => {
         cookie.remove('avalia-ai-auth');
-        await Router.push('/')
+        router.push('/')
         return firebase
             .auth()
             .signOut()
@@ -82,7 +83,7 @@ function useProvideAuth() {
 
     return {
         user,
-        signInWithGithub,
+        signInWithGoogle,
         signOut
     }
 }
