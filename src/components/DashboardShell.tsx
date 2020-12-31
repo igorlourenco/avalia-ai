@@ -20,7 +20,8 @@ import {NextSeo} from 'next-seo'
 
 const DashboardShell = ({children, title}) => {
     const auth = useAuth()
-    const path = window.location.pathname
+    let path = ''
+    if (typeof window !== "undefined") path = window.location.pathname
     const url = `https://avalia-ai.vercel.app/${path}`
 
     return (
