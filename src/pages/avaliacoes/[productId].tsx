@@ -42,8 +42,8 @@ const ProductFeedback = ({initialFeedback, product}) => {
              minHeight={`100vh`} backgroundColor={`gray.50`} paddingY={10}>
 
             <Box width={[`98vw`, `75vw`, `60vw`, `50vw`]} display={`flex`} flexDirection={`column`}>
-                <Heading size={`md`} color={`teal.900`} marginBottom={3}>{product.name}</Heading>
-                <Text fontWeight={`medium`} color={`teal.800`} marginBottom={3}>{product.description}</Text>
+                <Heading size={`md`} color={`teal.900`} marginBottom={3}>{product?.name}</Heading>
+                <Text fontWeight={`medium`} color={`teal.800`} marginBottom={3}>{product?.description}</Text>
                 <Divider color={`gray.200`}/>
             </Box>
 
@@ -75,7 +75,7 @@ const ProductFeedback = ({initialFeedback, product}) => {
                 allFeedback.length < 1 && (
                     <>
                         <Heading size={`md`} color={`teal.900`} fontWeight={`bold`} marginTop={8}>Não foi encontrado nenhum
-                            comentário sobre {product.name}</Heading>
+                            comentário sobre {product?.name}</Heading>
                         <Heading size={`sm`} color={`teal.900`} fontWeight={`bold`} marginTop={4}>Seja o primeiro a avaliar!</Heading>
                     </>
                 )
