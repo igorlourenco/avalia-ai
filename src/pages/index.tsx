@@ -46,6 +46,8 @@ const Home = () => {
                                 margin={2}>SAIR</Button>
                     </Flex>
                 }
+
+                <Box as={`iframe`} width={`100%`} height={`300px`} src={`https://localhost:3000/avaliacoes/embed/0ThVQqXzzrhX6qY054AQ`}/>
             </Flex>
         </>
     )
