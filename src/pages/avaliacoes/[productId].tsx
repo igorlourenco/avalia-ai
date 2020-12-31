@@ -72,7 +72,7 @@ const ProductFeedback = ({initialFeedback, product}) => {
             }
 
             {
-                allFeedback.length < 1 && (
+                allFeedback?.length < 1 && (
                     <>
                         <Heading size={`md`} color={`teal.900`} fontWeight={`bold`} marginTop={8}>Não foi encontrado nenhum
                             comentário sobre {product?.name}</Heading>
@@ -82,7 +82,7 @@ const ProductFeedback = ({initialFeedback, product}) => {
             }
 
             {
-                allFeedback.map((feedback, index) => (
+                allFeedback?.map((feedback, index) => (
                     <Feedback key={index} {...feedback}/>
                 ))
             }
