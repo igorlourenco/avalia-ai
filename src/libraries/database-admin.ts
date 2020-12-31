@@ -22,6 +22,7 @@ export async function getAllFeedback(productId: string) {
     try {
         const snapshot = await firestore.collection('feedback')
             .where('productId', '==', productId)
+            .where('status', '==', 'active')
             .get()
 
         const feedback = [];
@@ -66,6 +67,7 @@ export async function getUserFeedback(authorId: string) {
     try {
         const snapshot = await firestore.collection('feedback')
             .where('authorId', '==', authorId)
+            .where('status', 'in', ['pending', 'active'])
             .get();
 
         const feedback = [];

@@ -24,6 +24,11 @@ export async function createFeedback(feedback: Feedback) {
         .collection('feedback')
         .add(feedback)
 }
-export function deleteFeedback(id) {
-    return firestore.collection('feedback').doc(id).delete();
+
+export function deleteFeedback(id: string) {
+    return firestore.collection('feedback').doc(id).update({status: 'removed'});
+}
+
+export function updateFeedback(id: string, newValues: any) {
+    return firestore.collection('feedback').doc(id).update(newValues);
 }

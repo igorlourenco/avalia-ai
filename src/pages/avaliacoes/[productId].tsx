@@ -26,7 +26,7 @@ const ProductFeedback = ({initialFeedback, product}) => {
             rating: 5,
             ...feedback,
             createdAt: new Date().toISOString(),
-            status: 'pending'
+            status: 'active'
         }
 
         await createFeedback(newFeedback)
