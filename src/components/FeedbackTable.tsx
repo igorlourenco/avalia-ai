@@ -1,9 +1,7 @@
 import React from 'react';
-import { Box, Code, Switch, IconButton } from '@chakra-ui/react';
-
+import { Box, Switch } from '@chakra-ui/react';
 import { Table, Tr, Th, Td } from './Table';
 import DeleteFeedbackButton from './DeleteFeedbackButton';
-import {getProductById} from "../libraries/database";
 
 const FeedbackTable = ({feedback}) => {
     return (
