@@ -56,7 +56,7 @@ const ProductFeedback = ({initialFeedback, product}) => {
                         name={`comment`}
                         ref={register({required: 'Required'})}
                         placeholder={`Sugestão, elogio ou reclamação...`}/>
-                    {auth.user && <Button colorScheme={`teal`} marginTop={2} type={`submit`}>Enviar comentário</Button>}
+                    {auth.user && <Button isDisable={router.isFallback} colorScheme={`teal`} marginTop={2} type={`submit`}>Enviar comentário</Button>}
                 </FormControl>
             </Box>
 
@@ -112,7 +112,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
     return {
         paths,
-        fallback: false,
+        fallback: true,
     }
 }
 

@@ -14,7 +14,7 @@ const Dashboard = () => {
 
     if (!data) {
         return (
-            <DashboardShell>
+            <DashboardShell title={`Meus Produtos`}>
                 <ProductTableHeader isEmptyState={false}/>
                 <ProductTableSkeleton/>
             </DashboardShell>
@@ -23,13 +23,13 @@ const Dashboard = () => {
 
     return data.products?.length > 0 ?
         (
-            <DashboardShell>
+            <DashboardShell title={`Meus Produtos`}>
                 <ProductTableHeader isEmptyState={false}/>
                 <ProductTable products={data.products}/>
             </DashboardShell>
         ) :
         (
-            <DashboardShell>
+            <DashboardShell title={`Meus Produtos`}>
                 <ProductTableHeader isEmptyState={true}/>
                 <EmptyState/>
             </DashboardShell>

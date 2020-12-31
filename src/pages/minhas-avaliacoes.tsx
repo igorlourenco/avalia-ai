@@ -14,7 +14,7 @@ const MyFeedback = () => {
 
     if (!data) {
         return (
-            <DashboardShell>
+            <DashboardShell title={`Minhas Avaliações`}>
                 <FeedbackTableHeader/>
                 <FeedbackTableSkeleton/>
             </DashboardShell>
@@ -23,13 +23,13 @@ const MyFeedback = () => {
 
     return data.feedback?.length > 0 ?
         (
-            <DashboardShell>
+            <DashboardShell title={`Minhas Avaliações`}>
                 <FeedbackTableHeader/>
                 <FeedbackTable feedback={data.feedback}/>
             </DashboardShell>
         ) :
         (
-            <DashboardShell>
+            <DashboardShell title={`Minhas Avaliações`}>
                 <FeedbackTableHeader/>
                 <FeedbackEmptyState/>
             </DashboardShell>
