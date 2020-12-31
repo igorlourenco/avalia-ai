@@ -83,3 +83,17 @@ export async function getUserFeedback(authorId: string) {
         return {error}
     }
 }
+
+export async function findProductById(productId: string) {
+    try {
+        const snapshot = await firestore.collection('products')
+            .doc(productId)
+            .get()
+
+        const product = snapshot.data()
+
+        return {product};
+    } catch (error) {
+        return {error}
+    }
+}

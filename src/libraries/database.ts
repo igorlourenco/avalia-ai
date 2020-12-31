@@ -27,21 +27,3 @@ export async function createFeedback(feedback: Feedback) {
 export function deleteFeedback(id) {
     return firestore.collection('feedback').doc(id).delete();
 }
-
-export async function getProductById(id: string) {
-    try {
-        const snapshot = await firestore.collection('products')
-            .where('id', '==', id)
-            .get();
-
-        const products = [];
-
-        snapshot.forEach((doc) => {
-            products.push({id: doc.id, ...doc.data()});
-        });
-
-        return products[0];
-    } catch (error) {
-        return {error}
-    }
-}
