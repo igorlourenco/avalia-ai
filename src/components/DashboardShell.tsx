@@ -3,13 +3,21 @@ import {
     Flex,
     Stack,
     Link,
-    Icon, Image,
+    Image,
     Avatar,
     Button,
+    Portal,
+    PopoverContent,
+    PopoverArrow,
+    PopoverHeader,
+    PopoverCloseButton,
+    PopoverBody,
+    PopoverFooter,
+    Popover, PopoverTrigger, Box,
 } from '@chakra-ui/react'
 import {useAuth} from "../libraries/auth";
 
-const DashboardShell = ({children, isEmptyState}) => {
+const DashboardShell = ({children}) => {
     const auth = useAuth()
 
     return (
@@ -21,22 +29,42 @@ const DashboardShell = ({children, isEmptyState}) => {
                 paddingX={4}
                 alignItems="center"
             >
-                <Stack spacing={4} isInline justifyContent="center" alignItems="center">
+                <Stack spacing={4} isInline justifyContent="center" alignItems="center" borderTop={2} borderTopColor={`black`}>
                     <Image src={`logo.svg`} boxSize={`50px`}/>
-                    <Link href={`/dashboard`}>Meus produtos</Link>
-                    <Link href={`/minhas-avaliacoes`}>Minhas avaliações</Link>
+                    <Link href={`/dashboard`} fontWeight={`medium`} color={`teal.900`}>Meus produtos</Link>
+                    <Link href={`/minhas-avaliacoes`} fontWeight={`medium`} color={`teal.900`}>Minhas avaliações</Link>
                 </Stack>
                 <Flex alignItems="center" justifyContent="center">
-                    <Button width={`auto`} variant={`ghost`} size={`sm`} onClick={(e) => auth.signOut()}
-                            margin={2}>SAIR</Button>
-
-                    <Avatar size="sm" src={auth.user?.photoURL}/>
+                    <Popover>
+                        <PopoverTrigger>
+                            <Avatar size="sm" src={auth.user?.photoURL}/>
+                        </PopoverTrigger>
+                        <PopoverContent color="teal.900" bg="gray.50" borderColor="gray.10">
+                            <PopoverHeader pt={4} fontWeight="bold" border="0">
+                                {auth.user.displayName}
+                            </PopoverHeader>
+                            <PopoverArrow/>
+                            <PopoverCloseButton/>
+                            <PopoverFooter
+                                border="0"
+                                d="flex"
+                                alignItems="center"
+                                justifyContent="space-between"
+                                pb={4}
+                            >
+                                <Box fontSize="sm">Detalhes da conta</Box>
+                                <Button width={`auto`} variant={`link`} colorScheme={`red`} size={`sm`} onClick={(e) => auth.signOut()}
+                                        margin={2}>SAIR</Button>
+                            </PopoverFooter>
+                        </PopoverContent>
+                    </Popover>
                 </Flex>
             </Flex>
             <Flex
                 backgroundColor="gray.100"
-                justifyContent="center"
-                alignItems="center"
+                minHeight={`100vh`}
+                justifyContent="space-around"
+                alignItems="space-around"
             >
                 <Flex
                     margin={`0 auto`}

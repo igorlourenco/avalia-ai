@@ -2,11 +2,10 @@ import React from 'react'
 import {
     Heading,
     Box,
-    Text
+    Text, Link
 } from '@chakra-ui/react'
-import AddProductModal from "./AddProductModal";
 
-const EmptyState = () => {
+const FeedbackEmptyState = () => {
     return (
         <Box
             backgroundColor={`white`}
@@ -20,14 +19,15 @@ const EmptyState = () => {
             boxShadow={`md`}
         >
             <Heading size={`lg`} color={`teal.900`}>
-                Você ainda não cadastrou nenhum produto.
+                Você ainda não avaliou nenhum produto :(
             </Heading>
-            <Text marginTop={4} marginBottom={5} fontSize={`md`} fontWeight={`medium`}>
-                Bem-vindo(a) 👋🏾 Vamos começar!
-            </Text>
-            <AddProductModal isFirstProduct={true}/>
+            <Link>
+                <Text marginTop={4} marginBottom={5} fontSize={`md`} fontWeight={`medium`} color={`teal.700`}>
+                    Veja o ranking de produtos que usam Avalia Aí e conheça nossos parceiros!
+                </Text>
+            </Link>
         </Box>
     )
 }
 
-export default EmptyState
+export default FeedbackEmptyState

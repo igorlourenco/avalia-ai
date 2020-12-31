@@ -4,8 +4,8 @@ export const Th = (props: TextProps) => (
     <Text
         as="th"
         textTransform="uppercase"
-        fontSize="xs"
-        color="gray.500"
+        fontSize="sm"
+        color={`teal.800`}
         fontWeight="medium"
         px={4}
         {...props}
@@ -42,8 +42,6 @@ export const Table = (props: BoxProps) => {
             as="table"
             textAlign="left"
             backgroundColor="white"
-            ml={0}
-            mr={0}
             borderRadius={8}
             boxShadow="0px 4px 10px rgba(0, 0, 0, 0.05)"
             {...props}

@@ -1,8 +1,5 @@
 import React from 'react';
 import {
-    Breadcrumb,
-    BreadcrumbItem,
-    BreadcrumbLink,
     Heading,
     Flex,
     Box
@@ -10,18 +7,15 @@ import {
 
 import AddProductModal from "./AddProductModal";
 
-const ProductTableHeader = () => (
-    <Box mx={4}>
-        <Breadcrumb p={4}>
-            <BreadcrumbItem marginY={2}>
-                <BreadcrumbLink fontSize={`sm`}>Produtos</BreadcrumbLink>
-            </BreadcrumbItem>
-        </Breadcrumb>
+const ProductTableHeader = ({isEmptyState}) => (
+    <Box margin={4} >
         <Flex justifyContent={`space-between`}>
-            <Heading marginBottom={12}>
+            <Heading marginBottom={8} color={`teal.800`}>
                 Meus produtos
             </Heading>
-            <AddProductModal isFirstProduct={false}/>
+            {
+                !isEmptyState && <AddProductModal isFirstProduct={false}/>
+            }
         </Flex>
     </Box>
 );

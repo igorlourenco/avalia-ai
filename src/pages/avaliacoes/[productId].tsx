@@ -34,8 +34,8 @@ const ProductFeedback = ({initialFeedback}) => {
     }
 
     return (
-        <Box display={`flex`} flexDirection={`column`} width={`full`} maxWidth={`700px`} margin={`0 auto`}>
-            <form onSubmit={handleSubmit(addComment)}>
+        <Box alignItems={`center`} display={`flex`} flexDirection={`column`} width={`100vw`} margin={`0 auto`} minHeight={`100vh`} backgroundColor={`gray.50`}>
+            <Box as={`form`} onSubmit={handleSubmit(addComment)} width={[`98vw`, `75vw`, `60vw`, `50vw`]}>
                 <FormControl marginY={5}>
                     <FormLabel htmlFor={`comment`}>Comentário</FormLabel>
                     <Textarea
@@ -45,7 +45,7 @@ const ProductFeedback = ({initialFeedback}) => {
                         placeholder={`Deixe sua sugestão, elogio ou reclamação...`}/>
                     {auth.user && <Button colorScheme={`teal`} marginTop={2} type={`submit`}>Enviar comentário</Button>}
                 </FormControl>
-            </form>
+            </Box>
 
             {
                 !auth.user &&

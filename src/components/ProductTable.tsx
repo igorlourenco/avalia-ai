@@ -18,8 +18,8 @@ const ProductTable = ({products}) => {
             <tbody>
             {products.map((product) => (
                 <Box as="tr" key={product.id}>
-                    <Td fontWeight={`medium`}>{product.name}</Td>
-                    <Td>{product.description}</Td>
+                    <Td color={`teal.900`} fontWeight={`medium`}>{product.name}</Td>
+                    <Td>{`${product.description.substring(0, 37)}...`}</Td>
                     <Td>
                         {
                             product.id ? (
