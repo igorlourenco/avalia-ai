@@ -47,7 +47,7 @@ const Home = () => {
                     </Flex>
                 }
 
-                <Box as={`iframe`} width={`100%`} height={`300px`} src={`https://localhost:3000/avaliacoes/embed/0ThVQqXzzrhX6qY054AQ`}/>
+                <Box as={`iframe`} width={`100%`} height={`300px`} src={`https://avalia-ai.vercel.app/avaliacoes/embed/0ThVQqXzzrhX6qY054AQ`}/>
             </Flex>
         </>
     )
