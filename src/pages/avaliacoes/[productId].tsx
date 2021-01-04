@@ -1,9 +1,8 @@
 import {getAllFeedback, getAllProducts, findProductById} from "../../libraries/database-admin";
 import Feedback from "../../components/Feedback"
-import {Box, Button, Divider, Flex, FormControl, FormLabel, Heading, Text, Textarea} from "@chakra-ui/react"
+import {Box, Button, Divider, Flex, FormControl, FormLabel, Heading, Text, Textarea, useToast} from "@chakra-ui/react"
 import {useForm} from "react-hook-form";
 import {useAuth} from "../../libraries/auth";
-import {createFeedback} from "../../libraries/database";
 import {useState} from "react";
 import {useRouter} from "next/router";
 import {GetStaticPaths, GetStaticProps} from "next";
@@ -14,6 +13,7 @@ const ProductFeedback = ({initialFeedback, product}) => {
     const router = useRouter()
     const {register, handleSubmit} = useForm();
     const [allFeedback, setAllFeedback] = useState(initialFeedback)
+    const toast = useToast()
 
     const {productId} = router.query
 
@@ -21,15 +21,25 @@ const ProductFeedback = ({initialFeedback, product}) => {
         const newFeedback = {
             author: auth.user.displayName,
             authorId: auth.user.uid,
-            provider: auth.user.providerData[0].providerId,
-            productId,
-            rating: 5,
             ...feedback,
             createdAt: new Date().toISOString(),
             status: 'active'
         }
+        console.log(newFeedback)
+        const response = await fetch(`/api/feedback/new/${productId}`, {
+            method: "POST",
+            body: JSON.stringify(newFeedback)
+        });
 
-        await createFeedback(newFeedback)
+        if (response.status === 200) {
+            toast({
+                title: "Seu comentário foi enviado!",
+                description: "Já estamos cientes da sua opinião, obrigado pela avaliação.",
+                status: "success",
+                duration: 7000,
+                isClosable: true,
+            })
+        }
 
         // @ts-ignore
         document.getElementById('comment').value = ''
@@ -48,7 +58,8 @@ const ProductFeedback = ({initialFeedback, product}) => {
             </Box>
 
 
-            <Box as={`form`} onSubmit={handleSubmit(addComment)} width={[`98vw`, `75vw`, `60vw`, `50vw`]} marginBottom={5}>
+            <Box as={`form`} onSubmit={handleSubmit(addComment)} width={[`98vw`, `75vw`, `60vw`, `50vw`]}
+                 marginBottom={5}>
                 <FormControl marginY={5}>
                     <FormLabel htmlFor={`comment`} color={`teal.900`}>Deixe o seu comentário</FormLabel>
                     <Textarea
@@ -56,7 +67,9 @@ const ProductFeedback = ({initialFeedback, product}) => {
                         name={`comment`}
                         ref={register({required: 'Required'})}
                         placeholder={`Sugestão, elogio ou reclamação...`}/>
-                    {auth.user && <Button isDisable={router.isFallback} colorScheme={`teal`} marginTop={2} type={`submit`}>Enviar comentário</Button>}
+                    {auth.user &&
+                    <Button isDisable={router.isFallback} colorScheme={`teal`} marginTop={2} type={`submit`}>Enviar
+                        comentário</Button>}
                 </FormControl>
             </Box>
 
@@ -74,9 +87,11 @@ const ProductFeedback = ({initialFeedback, product}) => {
             {
                 allFeedback?.length < 1 && (
                     <>
-                        <Heading size={`md`} color={`teal.900`} fontWeight={`bold`} marginTop={8}>Não foi encontrado nenhum
+                        <Heading size={`md`} color={`teal.900`} fontWeight={`bold`} marginTop={8}>Não foi encontrado
+                            nenhum
                             comentário sobre {product?.name}</Heading>
-                        <Heading size={`sm`} color={`teal.900`} fontWeight={`bold`} marginTop={4}>Seja o primeiro a avaliar!</Heading>
+                        <Heading size={`sm`} color={`teal.900`} fontWeight={`bold`} marginTop={4}>Seja o primeiro a
+                            avaliar!</Heading>
                     </>
                 )
             }

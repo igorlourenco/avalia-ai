@@ -58,8 +58,8 @@ function useProvideAuth() {
             });
     };
 
-    const signOut = () => {
-        cookie.remove('avalia-ai-auth');
+    const signOut = async () => {
+        await cookie.remove('avalia-ai-auth');
         router.push('/')
         return firebase
             .auth()

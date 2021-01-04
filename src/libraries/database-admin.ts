@@ -1,5 +1,6 @@
 import {firestore} from './firebase-admin'
 import {compareDesc, parseISO} from "date-fns";
+import Feedback from "../interfaces/Feedback";
 
 
 export async function getAllProducts() {
@@ -16,6 +17,12 @@ export async function getAllProducts() {
     } catch (error) {
         return {error}
     }
+}
+
+export async function createFeedback(feedback: Feedback) {
+    return await firestore
+        .collection('feedback')
+        .add(feedback)
 }
 
 export async function getAllFeedback(productId: string) {

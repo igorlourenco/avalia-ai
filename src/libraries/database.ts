@@ -19,12 +19,6 @@ export async function createProduct(product: Product) {
         .add(product)
 }
 
-export async function createFeedback(feedback: Feedback) {
-    return await firestore
-        .collection('feedback')
-        .add(feedback)
-}
-
 export function deleteFeedback(id: string) {
     return firestore.collection('feedback').doc(id).update({status: 'removed'});
 }

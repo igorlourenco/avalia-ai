@@ -2,7 +2,6 @@ import {getAllProducts, findProductById} from "../../libraries/database-admin";
 import {Box, Button, FormControl, FormLabel, Textarea, useToast} from "@chakra-ui/react"
 import {useForm} from "react-hook-form";
 import {useAuth} from "../../libraries/auth";
-import {createFeedback} from "../../libraries/database";
 import {useRouter} from "next/router";
 import {GetStaticPaths, GetStaticProps} from "next";
 import {FcGoogle} from 'react-icons/fc'
@@ -16,40 +15,28 @@ const Comment = () => {
     const {productId} = router.query
 
     const addComment = async (feedback) => {
-
-        if (feedback.comment === " " || !feedback.comment) {
-            toast({
-                title: "Comentário vazio.",
-                description: "Escreva algo na caixa de comentário antes de enviar.",
-                status: "error",
-                duration: 7000,
-                isClosable: true,
-            })
-
-            return
-        }
-
         const newFeedback = {
             author: auth.user.displayName,
             authorId: auth.user.uid,
-            provider: auth.user.providerData[0].providerId,
-            productId,
-            rating: 5,
             ...feedback,
             createdAt: new Date().toISOString(),
             status: 'active'
         }
 
-        await createFeedback(newFeedback)
+        const response = await fetch(`/api/feedback/new/${productId}`, {
+            method: "POST",
+            body: JSON.stringify(newFeedback)
+        });
 
-        toast({
-            title: "Seu comentário foi enviado!",
-            description: "Já estamos cientes da sua opinião, obrigado pela avaliação.",
-            status: "success",
-            duration: 7000,
-            isClosable: true,
-        })
-
+        if (response.status === 200) {
+            toast({
+                title: "Seu comentário foi enviado!",
+                description: "Já estamos cientes da sua opinião, obrigado pela avaliação.",
+                status: "success",
+                duration: 7000,
+                isClosable: true,
+            })
+        }
 
         // @ts-ignore
         document.getElementById('comment').value = ''
