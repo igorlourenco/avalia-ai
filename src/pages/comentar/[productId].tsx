@@ -16,7 +16,7 @@ const Comment = () => {
 
     const addComment = async (feedback) => {
         const newFeedback = {
-            author: auth.user.displayName,
+            author: auth.user.name,
             authorId: auth.user.uid,
             ...feedback,
             createdAt: new Date().toISOString(),

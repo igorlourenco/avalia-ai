@@ -44,7 +44,7 @@ const ProductFeedback = ({initialFeedback, product}) => {
         // @ts-ignore
         document.getElementById('comment').value = ''
 
-        setAllFeedback([newFeedback, ...allFeedback])
+        setAllFeedback([{author: auth.user.displayName, ...newFeedback}, ...allFeedback])
     }
 
     return (
@@ -68,7 +68,7 @@ const ProductFeedback = ({initialFeedback, product}) => {
                         ref={register({required: 'Required'})}
                         placeholder={`Sugestão, elogio ou reclamação...`}/>
                     {auth.user &&
-                    <Button isDisable={router.isFallback} colorScheme={`teal`} marginTop={2} type={`submit`}>Enviar
+                    <Button colorScheme={`teal`} marginTop={2} type={`submit`}>Enviar
                         comentário</Button>}
                 </FormControl>
             </Box>
