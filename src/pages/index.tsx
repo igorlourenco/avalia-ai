@@ -27,13 +27,13 @@ const Home = () => {
                 </Heading>
                 {
                     !auth.user &&
-                        <Button variant="outline" size={`md`} fontWeight={`medium`}
-                                colorScheme={"#000"}
-                                onClick={auth.signInWithGoogle}
-                                margin={3}>
-                            <Box as={FcGoogle} size={24} marginRight={2}/>
-                            Entre com Google
-                        </Button>
+                    <Button variant="outline" size={`md`} fontWeight={`medium`}
+                            colorScheme={"#000"}
+                            onClick={auth.signInWithGoogle}
+                            margin={3}>
+                        <Box as={FcGoogle} size={24} marginRight={2}/>
+                        Entre com Google
+                    </Button>
 
 
                 }
@@ -46,6 +46,11 @@ const Home = () => {
                                 margin={2}>SAIR</Button>
                     </Flex>
                 }
+            </Flex>
+
+            <Flex alignItems={`center`} justifyContent={`center`}>
+                <iframe src="http://localhost:3000/comentar/D3ff0iDMYpfoIpGFZV8k"
+                        title="Comente Avalia Aí" width={`50%`} height={`300px`}/>
             </Flex>
         </>
     )
