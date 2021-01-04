@@ -51,10 +51,6 @@ function useProvideAuth() {
             .signInWithPopup(new firebase.auth.GoogleAuthProvider())
             .then(async (response) => {
                 await handleUser(response.user);
-
-                if (redirect) {
-                    await router.push(redirect);
-                }
             });
     };
 

@@ -54,7 +54,7 @@ const Comment = () => {
                         ref={register({required: 'Required'})}
                         placeholder={`Sugestão, elogio ou reclamação...`}/>
                     {auth.user &&
-                    <Button isDisable={router.isFallback} colorScheme={`teal`} marginTop={2} type={`submit`}>Enviar
+                    <Button colorScheme={`teal`} marginTop={2} type={`submit`}>Enviar
                         comentário</Button>
                     }
                 </FormControl>
