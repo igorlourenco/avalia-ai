@@ -48,9 +48,9 @@ const Home = () => {
                 }
             </Flex>
 
-            <Flex alignItems={`center`} justifyContent={`center`}>
-                <iframe src={`https://avalia-ai.vercel.app/comentar/${encodeURIComponent('D3ff0iDMYpfoIpGFZV8k')}`}
-                        title="Comente Avalia Aí" width={`50%`} height={`300px`}/>
+            <Flex alignItems={`center`} justifyContent={`center`} paddingX={3}>
+                <iframe src={`https://avalia-ai.vercel.app/comentar/D3ff0iDMYpfoIpGFZV8k`}
+                        title="Comente Avalia Aí" width={`60%`} height={`300px`} marginWidth={10}/>
             </Flex>
         </>
     )
