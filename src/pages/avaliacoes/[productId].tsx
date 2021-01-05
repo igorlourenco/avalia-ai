@@ -25,7 +25,7 @@ const ProductFeedback = ({initialFeedback, product}) => {
             createdAt: new Date().toISOString(),
             status: 'active'
         }
-        console.log(newFeedback)
+
         const response = await fetch(`/api/feedback/new/${productId}`, {
             method: "POST",
             body: JSON.stringify(newFeedback)
@@ -48,7 +48,7 @@ const ProductFeedback = ({initialFeedback, product}) => {
     }
 
     return (
-        <Box alignItems={`center`} display={`flex`} flexDirection={`column`} width={`100vw`} margin={`0 auto`}
+        <Box alignItems={`center`} display={`flex`} flexDirection={`column`} margin={`0 auto`}
              minHeight={`100vh`} backgroundColor={`gray.50`} paddingY={10}>
 
             <Box width={[`98vw`, `75vw`, `60vw`, `50vw`]} display={`flex`} flexDirection={`column`}>
@@ -60,29 +60,30 @@ const ProductFeedback = ({initialFeedback, product}) => {
 
             <Box as={`form`} onSubmit={handleSubmit(addComment)} width={[`98vw`, `75vw`, `60vw`, `50vw`]}
                  marginBottom={5}>
-                <FormControl marginY={5}>
+                <FormControl marginTop={5}>
                     <FormLabel htmlFor={`comment`} color={`teal.900`}>Deixe o seu comentário</FormLabel>
                     <Textarea
                         id={`comment`}
                         name={`comment`}
                         ref={register({required: 'Required'})}
                         placeholder={`Sugestão, elogio ou reclamação...`}/>
-                    {auth.user &&
-                    <Button colorScheme={`teal`} marginTop={2} type={`submit`}>Enviar
-                        comentário</Button>}
                 </FormControl>
+                {
+                    auth.user &&
+                    <Button colorScheme={`teal`} marginTop={2} type={`submit`}>Enviar
+                        comentário</Button>
+                }
+                {
+                    !auth.user &&
+                    <Button variant="outline" size={`md`} fontWeight={`medium`}
+                            colorScheme={"#000"}
+                            onClick={auth.signInWithGoogle}
+                            marginTop={2}>
+                        <Box as={FcGoogle} size={24} marginRight={2}/>
+                        Entre com sua conta Google
+                    </Button>
+                }
             </Box>
-
-            {
-                !auth.user &&
-                <Button variant="outline" size={`md`} fontWeight={`medium`}
-                        colorScheme={"#000"}
-                        onClick={auth.signInWithGoogle}
-                        margin={3}>
-                    <Box as={FcGoogle} size={24} marginRight={2}/>
-                    Entre com Google
-                </Button>
-            }
 
             {
                 allFeedback?.length < 1 && (

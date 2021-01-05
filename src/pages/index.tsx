@@ -49,7 +49,7 @@ const Home = () => {
             </Flex>
 
             <Flex alignItems={`center`} justifyContent={`center`}>
-                <iframe src={`${process.env.BASE_URL}/comentar/${encodeURIComponent('D3ff0iDMYpfoIpGFZV8k')}`}
+                <iframe src={`https://avalia-ai.vercel.app/comentar/${encodeURIComponent('D3ff0iDMYpfoIpGFZV8k')}`}
                         title="Comente Avalia Aí" width={`50%`} height={`300px`}/>
             </Flex>
         </>

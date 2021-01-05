@@ -12,7 +12,12 @@ const Comment = () => {
     const {register, handleSubmit} = useForm();
     const toast = useToast()
 
-    const {productId} = router.query
+    const {productId, backgroundColor, buttonColor, fontColor} = router.query
+
+    let BACKGROUND_COLOR: string
+    backgroundColor === 'gray' ? BACKGROUND_COLOR = 'gray.100' : BACKGROUND_COLOR = backgroundColor?.toString() || 'white'
+    const BUTTON_COLOR = buttonColor?.toString() || 'teal'
+    const FONT_COLOR = fontColor?.toString() || 'gray.900'
 
     const addComment = async (feedback) => {
         const newFeedback = {
@@ -45,31 +50,32 @@ const Comment = () => {
     return (
         <>
             <Box as={`form`} onSubmit={handleSubmit(addComment)} width={`100%`}
-                 marginBottom={5}>
-                <FormControl marginY={5}>
-                    <FormLabel htmlFor={`comment`} color={`teal.900`}>Deixe o seu comentário</FormLabel>
+                 marginBottom={5} backgroundColor={`${BACKGROUND_COLOR}`} color={`${FONT_COLOR}`}>
+                <FormControl marginTop={5}>
+                    <FormLabel htmlFor={`comment`}>Deixe o seu comentário</FormLabel>
                     <Textarea
                         id={`comment`}
                         name={`comment`}
                         ref={register({required: 'Required'})}
                         placeholder={`Sugestão, elogio ou reclamação...`}/>
-                    {auth.user &&
-                    <Button colorScheme={`teal`} marginTop={2} type={`submit`}>Enviar
-                        comentário</Button>
-                    }
                 </FormControl>
-            </Box>
-
-            {
-                !auth.user &&
-                <Button variant="outline" size={`md`} fontWeight={`medium`}
-                        colorScheme={"#000"}
-                        onClick={auth.signInWithGoogle}
-                        margin={3}>
-                    <Box as={FcGoogle} size={24} marginRight={2}/>
-                    Entre com Google
+                {auth.user &&
+                <Button colorScheme={`${BUTTON_COLOR}`} marginTop={2} type={`submit`}>
+                    Enviar comentário
                 </Button>
-            }
+                }
+                {
+                    !auth.user &&
+                    <Button variant="outline" size={`md`} fontWeight={`medium`}
+                            colorScheme={"#000"}
+                            onClick={auth.signInWithGoogle}
+                            marginTop={2}
+                    >
+                        <Box as={FcGoogle} size={24} marginRight={2}/>
+                        Entre com sua conta Google
+                    </Button>
+                }
+            </Box>
         </>
     )
 }
