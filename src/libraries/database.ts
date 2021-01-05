@@ -30,6 +30,11 @@ export function updateFeedback(id: string, newValues: any) {
     return firestore.collection('feedback').doc(id).update(newValues);
 }
 
+export function updateProduct(id: string, newValues: any) {
+    return firestore.collection('products').doc(id).update(newValues);
+}
+
+
 export async function findProductById(productId: string) {
     try {
         const snapshot = await firestore.collection('products')

@@ -2,8 +2,8 @@ import {Td} from "./Table";
 import {Box, Link, Text} from "@chakra-ui/react";
 import {format, parseISO} from "date-fns";
 import React from "react";
-import DeleteFeedbackButton from "./DeleteFeedbackButton";
 import DeleteProductButton from "./DeleteProductButton";
+import EditProductButton from "./EditProductButton";
 
 const ProductRow = ({product}) => {
     return (
@@ -23,6 +23,9 @@ const ProductRow = ({product}) => {
             <Td>{format(parseISO(product.createdAt), 'PPpp')}</Td>
             <Td>
                 <DeleteProductButton productId={product.id}/>
+            </Td>
+            <Td>
+                <EditProductButton product={product}/>
             </Td>
         </Box>
     )

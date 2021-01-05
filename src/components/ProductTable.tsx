@@ -14,10 +14,11 @@ const ProductTable = ({products}) => {
                 <Th>Link para Feedback</Th>
                 <Th>Adicionado em</Th>
                 <Th>{''}</Th>
+                <Th>{''}</Th>
             </Tr>
             </thead>
             <tbody>
-            {products.map((product) => <ProductRow product={product}/>)}
+            {products.map((product, index) => <ProductRow key={index} product={product}/>)}
             </tbody>
         </Table>
     );

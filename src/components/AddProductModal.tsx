@@ -101,8 +101,8 @@ const AddProductModal = ({isFirstProduct}) => {
                             <FormLabel color={`teal.900`}>Qual é a categoria do produto?</FormLabel>
                             <Select name={`category`} ref={register({required: 'Required'})}>
                                 {
-                                    productCategories.map(productCategory => (
-                                        <option value={productCategory.value}>{productCategory.label}</option>
+                                    productCategories.map((productCategory, index) => (
+                                        <option key={index} value={productCategory.value}>{productCategory.label}</option>
                                     ))
                                 }
                             </Select>

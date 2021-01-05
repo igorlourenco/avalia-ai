@@ -16,8 +16,8 @@ export const productCategories = [
         value: 'person'
     },
     {
-        label: 'Prestação de Serviço',
-        value: 'service-provision'
+        label: 'Prestação de Serviços',
+        value: 'services-provision'
     },
     {
         label: 'Produto Digital',
