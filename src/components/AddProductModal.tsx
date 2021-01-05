@@ -30,6 +30,7 @@ const AddProductModal = ({isFirstProduct}) => {
     const addProduct = async (product: Product) => {
         const newProduct = {
             owner: auth.user.uid,
+            status: 'active',
             createdAt: new Date().toISOString(),
             ...product
         }

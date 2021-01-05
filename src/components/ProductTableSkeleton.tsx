@@ -28,6 +28,7 @@ const ProductTableSkeleton = () => {
                     <Th>Link para Feedback</Th>
                     <Th>Adicionado em</Th>
                     <Th>{''}</Th>
+                    <Th>{''}</Th>
                 </Tr>
                 </thead>
                 <tbody>
@@ -35,7 +36,8 @@ const ProductTableSkeleton = () => {
                 <SkeletonRow width="175px" />
                 <SkeletonRow width="75px" />
                 <SkeletonRow width="120px" />
-                <SkeletonRow width="75px" />
+                <SkeletonRow width="40px" />
+                <SkeletonRow width="40px" />
                 </tbody>
             </Table>
     );

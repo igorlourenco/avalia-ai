@@ -52,6 +52,7 @@ export async function getUserProducts(uid: string) {
     try {
         const snapshot = await firestore.collection('products')
             .where('owner', '==', uid)
+            .where('status', '==', 'active')
             .get();
 
         const products = [];

@@ -22,6 +22,10 @@ export function deleteFeedback(id: string) {
     return firestore.collection('feedback').doc(id).update({status: 'removed'});
 }
 
+export function deleteProduct(id: string) {
+    return firestore.collection('products').doc(id).update({status: 'removed'});
+}
+
 export function updateFeedback(id: string, newValues: any) {
     return firestore.collection('feedback').doc(id).update(newValues);
 }
