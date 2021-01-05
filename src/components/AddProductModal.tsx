@@ -17,6 +17,7 @@ import {useAuth} from "../libraries/auth";
 import useSWR, {mutate} from 'swr'
 import fetcher from "../utilitaries/fetcher";
 import {IoMdAdd} from 'react-icons/io'
+import {productCategories} from "../utilitaries/consts";
 
 const AddProductModal = ({isFirstProduct}) => {
     const auth = useAuth()
@@ -98,12 +99,11 @@ const AddProductModal = ({isFirstProduct}) => {
                         <FormControl marginTop={4}>
                             <FormLabel color={`teal.900`}>Qual é a categoria do produto?</FormLabel>
                             <Select name={`category`} ref={register({required: 'Required'})}>
-                                <option value={`company`}>Empresa</option>
-                                <option value={`brand`}>Marca</option>
-                                <option value={`services-provision`}>Prestação de serviços</option>
-                                <option value={`digital-product`}>Produto digital</option>
-                                <option value={`physical-product`}>Produto físico</option>
-                                <option value={`site-or-blog`}>Site ou blog</option>
+                                {
+                                    productCategories.map(productCategory => (
+                                        <option value={productCategory.value}>{productCategory.label}</option>
+                                    ))
+                                }
                             </Select>
                         </FormControl>
                     </ModalBody>
