@@ -24,18 +24,16 @@ const FeedbackTableSkeleton = () => {
         <Table>
             <thead>
             <Tr>
-                <Th>Name</Th>
-                <Th>Feedback</Th>
-                <Th>Route</Th>
-                <Th>Visible</Th>
+                <Th>Produto</Th>
+                <Th>Comentário</Th>
+                <Th>É visível?</Th>
                 <Th width="50px">{''}</Th>
             </Tr>
             </thead>
             <tbody>
-            <SkeletonRow width="75px" />
-            <SkeletonRow width="125px" />
-            <SkeletonRow width="50px" />
             <SkeletonRow width="100px" />
+            <SkeletonRow width="150px" />
+            <SkeletonRow width="125px" />
             <SkeletonRow width="75px" />
             </tbody>
         </Table>

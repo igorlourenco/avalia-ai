@@ -40,7 +40,7 @@ const DeleteFeedbackButton = ({ feedbackId }) => {
 
     return (
         <>
-            <IconButton variant={`ghost`} aria-label="Search database" icon={<Box as={AiFillDelete} color={`red.600`} size={24}/>} onClick={() => setIsOpen(true)}/>
+            <IconButton variant={`ghost`} aria-label="Search database" icon={<Box as={AiFillDelete} color={`red.600`} size={18}/>} onClick={() => setIsOpen(true)}/>
             <AlertDialog
                 isOpen={isOpen}
                 leastDestructiveRef={cancelRef}

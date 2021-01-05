@@ -2,7 +2,6 @@ import firebase from 'firebase/app'
 import 'firebase/firestore'
 import User from '../interfaces/User'
 import Product from "../interfaces/Product";
-import Feedback from "../interfaces/Feedback";
 
 const firestore = firebase.firestore()
 
@@ -25,4 +24,18 @@ export function deleteFeedback(id: string) {
 
 export function updateFeedback(id: string, newValues: any) {
     return firestore.collection('feedback').doc(id).update(newValues);
+}
+
+export async function findProductById(productId: string) {
+    try {
+        const snapshot = await firestore.collection('products')
+            .doc(productId)
+            .get()
+
+        const product = snapshot.data()
+
+        return {product};
+    } catch (error) {
+        return {error}
+    }
 }
