@@ -1,5 +1,5 @@
 import {getAllProducts, findProductById} from "../../libraries/database-admin";
-import {Box, Button, FormControl, FormLabel, Textarea, useToast} from "@chakra-ui/react"
+import {Box, Button, FormControl, FormHelperText, FormLabel, Link, Text, Textarea, useToast} from "@chakra-ui/react"
 import {useForm} from "react-hook-form";
 import {useAuth} from "../../libraries/auth";
 import {useRouter} from "next/router";
@@ -21,7 +21,7 @@ const Comment = () => {
 
     const addComment = async (feedback) => {
         const newFeedback = {
-            author: auth.user.displayName,
+            author: auth.user.displayName || auth.user.name,
             authorId: auth.user.uid,
             ...feedback,
             createdAt: new Date().toISOString(),
@@ -58,6 +58,11 @@ const Comment = () => {
                         name={`comment`}
                         ref={register({required: 'Required'})}
                         placeholder={`Sugestão, elogio ou reclamação...`}/>
+                    <FormHelperText fontSize={10}>
+                        <Link isExternal href={'/'} display={`flex`}>
+                            Criado e mantido por &nbsp;<Text fontWeight={`medium`}>Avalia Aí</Text>
+                        </Link>
+                    </FormHelperText>
                 </FormControl>
                 {auth.user &&
                 <Button colorScheme={`${BUTTON_COLOR}`} marginTop={2} type={`submit`}>

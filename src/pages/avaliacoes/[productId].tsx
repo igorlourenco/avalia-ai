@@ -1,6 +1,18 @@
 import {getAllFeedback, getAllProducts, findProductById} from "../../libraries/database-admin";
 import Feedback from "../../components/Feedback"
-import {Box, Button, Divider, Flex, FormControl, FormLabel, Heading, Text, Textarea, useToast} from "@chakra-ui/react"
+import {
+    Box,
+    Button,
+    Divider,
+    FormHelperText,
+    FormControl,
+    FormLabel,
+    Heading,
+    Text,
+    Textarea,
+    useToast,
+    Link
+} from "@chakra-ui/react"
 import {useForm} from "react-hook-form";
 import {useAuth} from "../../libraries/auth";
 import {useState} from "react";
@@ -19,7 +31,7 @@ const ProductFeedback = ({initialFeedback, product}) => {
 
     const addComment = async (feedback) => {
         const newFeedback = {
-            author: auth.user.displayName,
+            author: auth.user.displayName || auth.user.name,
             authorId: auth.user.uid,
             ...feedback,
             createdAt: new Date().toISOString(),
@@ -59,7 +71,7 @@ const ProductFeedback = ({initialFeedback, product}) => {
 
 
             <Box as={`form`} onSubmit={handleSubmit(addComment)} width={[`98vw`, `75vw`, `60vw`, `50vw`]}
-                 marginBottom={5}>
+                 marginBottom={10}>
                 <FormControl marginTop={5}>
                     <FormLabel htmlFor={`comment`} color={`teal.900`}>Deixe o seu comentário</FormLabel>
                     <Textarea
@@ -67,6 +79,11 @@ const ProductFeedback = ({initialFeedback, product}) => {
                         name={`comment`}
                         ref={register({required: 'Required'})}
                         placeholder={`Sugestão, elogio ou reclamação...`}/>
+                    <FormHelperText fontSize={10}>
+                        <Link isExternal href={'/'} display={`flex`}>
+                            Criado e mantido por &nbsp;<Text fontWeight={`medium`}>Avalia Aí</Text>
+                        </Link>
+                    </FormHelperText>
                 </FormControl>
                 {
                     auth.user &&
@@ -88,7 +105,7 @@ const ProductFeedback = ({initialFeedback, product}) => {
             {
                 allFeedback?.length < 1 && (
                     <>
-                        <Heading size={`md`} color={`teal.900`} fontWeight={`bold`} marginTop={8}>Não foi encontrado
+                        <Heading size={`md`} color={`teal.900`} fontWeight={`bold`} marginTop={10}>Não foi encontrado
                             nenhum
                             comentário sobre {product?.name}</Heading>
                         <Heading size={`sm`} color={`teal.900`} fontWeight={`bold`} marginTop={4}>Seja o primeiro a
